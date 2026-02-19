@@ -85,7 +85,7 @@ export function AppSidebar() {
                       href={item.url}
                       className={`
                     flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200
-                    ${pathname === item.url ? "bg-blue-500 text-white" : "text-gray-700 hover:bg-gray-200 hover:text-gray-900"}
+                    ${pathname === item.url ? "bg-primary text-white" : "text-gray-700 hover:bg-gray-200 hover:text-gray-900"}
                   `}
                     >
                       <item.icon
