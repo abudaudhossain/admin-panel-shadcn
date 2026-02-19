@@ -1,4 +1,7 @@
+'use client'
 import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Search, Settings, User2 } from "lucide-react"
+import { usePathname } from "next/navigation";
+
 
 import {
   Sidebar,
@@ -9,6 +12,7 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
@@ -18,32 +22,36 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
     title: "Inbox",
-    url: "#",
+    url: "/inbox",
     icon: Inbox,
   },
   {
     title: "Calendar",
-    url: "#",
+    url: "/calendar",
     icon: Calendar,
+
   },
   {
     title: "Search",
-    url: "#",
+    url: "/search",
     icon: Search,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
+
   },
 ]
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
     <Sidebar
       collapsible="icon"
@@ -62,7 +70,7 @@ export function AppSidebar() {
           />
 
         </div>
-       
+
       </SidebarHeader>
 
       <SidebarContent>
@@ -73,15 +81,24 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                    <a
+                      href={item.url}
+                      className={`
+                    flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200
+                    ${pathname === item.url ? "bg-blue-500 text-white" : "text-gray-700 hover:bg-gray-200 hover:text-gray-900"}
+                  `}
+                    >
+                      <item.icon
+                        className={`h-4 w-4 ${pathname === item.url ? "text-white" : "text-gray-500"}`}
+                      />
+                      <span className="group-data-[collapsed=true]:hidden">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+
         </SidebarGroup>
       </SidebarContent>
 
